@@ -1,12 +1,14 @@
 package com.frontalx.springboot_crud_hibernate.controller;
 
 import com.frontalx.springboot_crud_hibernate.domain.Customer;
+import com.frontalx.springboot_crud_hibernate.domain.Orders;
 import com.frontalx.springboot_crud_hibernate.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -27,6 +29,13 @@ public class HibernateDemoController {
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         Customer savedCustomer = customerService.createCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCustomer);
+    }
+
+    @PostMapping("/order/{customerId}")
+    public ResponseEntity<Orders> createOrder(@RequestBody Orders orders,
+                                              @PathVariable String customerId) {
+        Orders savedOrder = customerService.createOrder(orders, customerId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedOrder);
     }
 
 

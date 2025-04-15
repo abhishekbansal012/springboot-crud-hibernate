@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +17,10 @@ public class Orders {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long orderId;
+
+    @Column
+    private List<String> items;
 
     // Many orders belong to one customer
     @ManyToOne(fetch = FetchType.LAZY)
